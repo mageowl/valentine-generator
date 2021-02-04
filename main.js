@@ -1,9 +1,33 @@
-const recipientListEl = document.getElementById("recipients");
-const noRecipientEl = document.getElementById("no-recipient");
+const el = {
+	recipientList: document.getElementById("recipients"),
+	noRecipient: document.getElementById("no-recipient"),
+	templateSelect: document.getElementById("template-select"),
+	customOptgroup: document.querySelector("optgroup#custom")
+};
+
 const getRecipientCount = () =>
-	Array.from(recipientListEl.children).filter(
+	Array.from(el.recipientList.children).filter(
 		(element) => element instanceof HTMLLIElement
 	).length;
+
+el.templateSelect.addEventListener("change", onTemplateChange);
+
+if (localStorage.vgenCustomTemplates) {
+	let templates = JSON.parse(localStorage.vgenCustomTemplates);
+	for (const template in templates) {
+		if (Object.hasOwnProperty.call(templates, template)) {
+			const md = templates[template];
+
+			const opt = document.createElement("option");
+			opt.value = `_txt${md}`;
+			console.log(opt.value);
+			opt.innerText = template;
+			el.customOptgroup.appendChild(opt);
+		}
+	}
+} else {
+	el.customOptgroup.style.display = "none";
+}
 
 async function importRecipients() {
 	if (getRecipientCount() > 0 && !confirm("Override exsisting recipients?"))
@@ -23,7 +47,7 @@ async function importRecipients() {
 		return;
 	}
 
-	Array.from(recipientListEl.children).forEach((child) => {
+	Array.from(el.recipientList.children).forEach((child) => {
 		if (child instanceof HTMLLIElement) child.remove();
 	});
 
@@ -36,42 +60,60 @@ async function importRecipients() {
 		delBtn.onclick = () => {
 			li.remove();
 			if (getRecipientCount() == 0) {
-				noRecipientEl.style.display = "block";
+				el.noRecipient.style.display = "block";
 			}
 		};
 		li.appendChild(delBtn);
 
-		recipientListEl.appendChild(li);
+		el.recipientList.appendChild(li);
 	});
-	noRecipientEl.style.display = "none";
+	el.noRecipient.style.display = "none";
 }
 
-// const el = document.createElement("input");
-// el.type = "file";
+async function onTemplateChange() {
+	if (el.templateSelect.value == "_upload") {
+		const input = document.createElement("input");
+		input.type = "file";
+		input.style.display = "none";
 
-// el.style.display = "none";
-// document.body.appendChild(el);
-// el.click();
+		document.body.appendChild(input);
+		input.click();
 
-// let file = await new Promise((resolve) => {
-// 	el.onchange = (e) => {
-// 		resolve(e.target.files[0]);
-// 	};
-// });
+		let file = await new Promise((resolve) => {
+			input.onchange = (e) => {
+				resolve(e.target.files[0]);
+			};
+		});
 
-// document.body.removeChild(el);
+		document.body.removeChild(input);
 
-// if (file == undefined) return;
+		if (file == undefined) return;
 
-// let reader = new FileReader();
-// reader.readAsText(file);
+		let reader = new FileReader();
+		reader.readAsText(file);
 
-// /** @type {string} */
-// let text = await new Promise((resolve) => {
-// 	reader.onload = (e) => {
-// 		resolve(e.target.result);
-// 	};
-// });
+		/** @type {string} */
+		let text = await new Promise((resolve) => {
+			reader.onload = (e) => {
+				resolve(e.target.result);
+			};
+		});
+
+		let filename = input.value.split(".")[0].split("\\").slice(-1);
+		console.log(filename, input.value);
+
+		if (localStorage.vgenCustomTemplates) {
+			localStorage.vgenCustomTemplates = JSON.stringify({
+				...JSON.parse(localStorage.vgenCustomTemplates),
+				[filename]: text
+			});
+		} else {
+			localStorage.vgenCustomTemplates = JSON.stringify({ [filename]: text });
+		}
+
+		location.reload();
+	}
+}
 
 function addRecipient() {
 	let name = prompt("Name:");
@@ -84,24 +126,23 @@ function addRecipient() {
 	delBtn.onclick = () => {
 		li.remove();
 		if (getRecipientCount() == 0) {
-			noRecipientEl.style.display = "block";
+			el.noRecipient.style.display = "block";
 		}
 	};
 	li.appendChild(delBtn);
 
-	recipientListEl.appendChild(li);
-	noRecipientEl.style.display = "none";
+	el.recipientList.appendChild(li);
+	el.noRecipient.style.display = "none";
 }
 
 async function printCards() {
-	let template = (
-		await fetch(document.getElementById("template-select").value).then((r) =>
-			r.text()
-		)
+	let template = (el.templateSelect.value.startsWith("_txt")
+		? el.templateSelect.value.split("_txt")[1]
+		: await fetch(el.templateSelect.value).then((r) => r.text())
 	).replace("{NAME}", document.getElementById("name").value);
 	let html = "";
 
-	Array.from(recipientListEl.children)
+	Array.from(el.recipientList.children)
 		.filter((element) => element instanceof HTMLLIElement)
 		.map((e) => e.innerHTML.split("<")[0])
 		.forEach((name) => {

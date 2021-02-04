@@ -36,7 +36,8 @@ body {
 	font-family: cursive;
 }
 
-h1 {
+h1,
+h2 {
 	text-align: center;
 	margin-top: 0;
 	margin-bottom: 100px;
@@ -91,8 +92,13 @@ li {
 		display: block;
 	}
 
-	#print div.card-inside:nth-child(even) {
-		transform: translateY(calc(50vh - 100%));
+	#print div.card-inside {
+		height: 50vh;
+	}
+
+	#print div.card-inside:nth-child(odd) {
+		border-bottom: 3px solid gray;
+		box-sizing: border-box;
 	}
 
 	#print div.card-inside:nth-child(even):not(:last-child) {
