@@ -1,0 +1,49 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Valintine Generator</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div id="header-background">❤️</div>
+		<h1 id="header">Valintine Generator</h1>
+		<div id="form">
+			Template:
+			<select id="template-select">
+				<optgroup label="Default">
+					<option value="templates/default.md">Regular</option>
+					<option value="templates/no-mark.md">No-Mark</option>
+					<option value="templates/hearts-and-kisses.md">
+						Hearts and Kisses
+					</option>
+				</optgroup>
+				<optgroup label="Special">
+					<option value="templates/covid.md">COVID 🦠</option>
+				</optgroup>
+				<option value="_custom">Custom</option></select
+			><br /><br />
+
+			Recipients:
+			<button onclick="importRecipients();">Import from clipboard</button>
+			<ul id="recipients">
+				<span id="no-recipient">No recipients</span>
+			</ul>
+			<button onclick="addRecipient()">Add Recipient</button><br /><br />
+
+			Your name: <input type="text" placeholder="Owen L." id="name" /><br />
+			<br />
+
+			<button onclick="printCards();">Print!</button>
+		</div>
+
+		<div id="print">
+			<em>Warning:</em> Do not print out this page before pressing the print
+			button.
+		</div>
+
+		<!-- Drawdown.js by Adam Leggett -->
+		<script src="drawdown.js"></script>
+		<script src="main.js"></script>
+	</body>
+</html>

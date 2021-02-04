@@ -1,0 +1,101 @@
+body {
+	margin: 0;
+	margin-top: 100px;
+}
+
+#header-background {
+	text-align: center;
+	font-size: 100px;
+	position: absolute;
+	top: 0px;
+	width: 100vw;
+	height: 250px;
+	line-height: 250px;
+	z-index: -1;
+	background-color: pink;
+}
+
+#form {
+	padding: 20px 0 0 8px;
+}
+
+#recipients {
+	margin-top: 10px;
+}
+
+#recipients span#no-recipient {
+	color: rgb(175, 175, 175);
+	font-style: italic;
+	display: block;
+	margin-bottom: 5px;
+}
+
+#front-text {
+	font-size: 20px;
+	resize: none;
+	font-family: cursive;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 100px;
+	font-family: cursive;
+}
+
+button {
+	background-color: transparent;
+	border: 1px solid rgb(73, 73, 73);
+	border-radius: 3px;
+	outline: none;
+}
+
+button:active {
+	border: 1px solid rgb(0, 0, 0);
+	background-color: pink;
+}
+
+input {
+	border: 1px solid rgb(73, 73, 73);
+	border-radius: 3px;
+}
+
+textarea:focus,
+input:focus {
+	background-color: pink;
+	border: 1px solid rgb(73, 73, 73);
+	border-radius: 2px;
+	outline: none;
+}
+
+li {
+	padding-top: 3px;
+}
+
+#print {
+	display: none;
+}
+
+@media print {
+	body {
+		margin-top: 0;
+	}
+
+	#form,
+	#header-background,
+	#header {
+		display: none;
+	}
+
+	#print {
+		display: block;
+	}
+
+	#print div.card-inside:nth-child(even) {
+		transform: translateY(calc(50vh - 100%));
+	}
+
+	#print div.card-inside:nth-child(even):not(:last-child) {
+		page-break-after: always;
+	}
+}
