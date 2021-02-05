@@ -182,16 +182,16 @@ async function printCards() {
 	Array.from(el.recipientList.children)
 		.filter((element) => element instanceof HTMLLIElement)
 		.map((e) => e.innerHTML.split("<")[0])
-		.forEach((name, i) => {
-			html += `<div class="card">${markdown(
-				template.replace("{RECIPIENT}", name)
-			)}</div>`;
+		.forEach((name, i, arr) => {
+			html += `<div class="card ${
+				i == arr.length - 1 ? "needs-back" : ""
+			}">${markdown(template.replace("{RECIPIENT}", name))}</div>`;
 			if (el.printBack.checked) {
 				let emojiList = el.emojiList.value.split("\n");
 				insert += `<div class="card back"><span class="emoji">${
 					emojiList[Math.floor(Math.random() * emojiList.length)]
 				}</span>To: ${name}</div>`;
-				if ((i + 1) % 2 == 0) {
+				if ((i + 1) % 2 == 0 || i == arr.length - 1) {
 					html += insert;
 					insert = "";
 				}

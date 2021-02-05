@@ -68,9 +68,16 @@ span.btn {
 	font-size: 13.3333px;
 }
 
-button {
+button,
+select {
 	cursor: pointer;
 	font-family: "Indie Flower", sans-serif;
+}
+
+select {
+	appearance: none;
+	border-radius: 3px;
+	padding-left: 5px;
 }
 
 textarea {
@@ -94,10 +101,11 @@ input {
 }
 
 textarea:focus,
-input:focus {
+input:focus,
+select:focus {
 	background-color: pink;
 	border: 1px solid rgb(73, 73, 73);
-	border-radius: 2px;
+	border-radius: 3px;
 	outline: none;
 }
 
@@ -161,7 +169,8 @@ li {
 		box-sizing: border-box;
 	}
 
-	#print div.card:nth-child(even):not(:last-child) {
+	#print div.card:nth-child(even):not(:last-child),
+	#print div.card.needs-back {
 		page-break-after: always;
 	}
 }
