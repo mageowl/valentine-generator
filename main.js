@@ -67,12 +67,20 @@ async function importRecipients() {
 			if (getRecipientCount() == 0) {
 				el.noRecipient.style.display = "block";
 			}
+			if (getRecipientCount() < 2) {
+				el.printBack.disabled = true;
+				el.printBack.checked = false;
+			}
 		};
 		li.appendChild(delBtn);
 
 		el.recipientList.appendChild(li);
 	});
+
 	el.noRecipient.style.display = "none";
+	if (getRecipientCount() > 1) {
+		el.printBack.disabled = false;
+	}
 }
 
 async function onTemplateChange() {
@@ -148,11 +156,19 @@ function addRecipient() {
 		if (getRecipientCount() == 0) {
 			el.noRecipient.style.display = "block";
 		}
+		if (getRecipientCount() < 2) {
+			el.printBack.disabled = true;
+			el.printBack.checked = false;
+		}
 	};
 	li.appendChild(delBtn);
 
 	el.recipientList.appendChild(li);
 	el.noRecipient.style.display = "none";
+
+	if (getRecipientCount() > 1) {
+		el.printBack.disabled = false;
+	}
 }
 
 async function printCards() {
@@ -170,7 +186,7 @@ async function printCards() {
 			html += `<div class="card">${markdown(
 				template.replace("{RECIPIENT}", name)
 			)}</div>`;
-			if (el.printBack.value == "on") {
+			if (el.printBack.checked) {
 				let emojiList = el.emojiList.value.split("\n");
 				insert += `<div class="card back"><span class="emoji">${
 					emojiList[Math.floor(Math.random() * emojiList.length)]

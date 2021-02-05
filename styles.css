@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Indie+Flower&display=swap");
+
 body {
 	margin: 0;
 	margin-top: 100px;
+	font-family: "Indie Flower", sans-serif;
 }
 
 #header-background {
@@ -44,15 +47,15 @@ body {
 #front-text {
 	font-size: 20px;
 	resize: none;
-	font-family: cursive;
+	font-family: "Dancing Script", cursive;
 }
 
 h1,
 h2 {
 	text-align: center;
 	margin-top: 0;
-	margin-bottom: 100px;
-	font-family: cursive;
+	margin-bottom: 110px;
+	font-family: "Dancing Script", cursive;
 }
 
 button,
@@ -67,11 +70,12 @@ span.btn {
 
 button {
 	cursor: pointer;
+	font-family: "Indie Flower", sans-serif;
 }
 
 textarea {
 	resize: vertical;
-	font-family: sans-serif;
+	font-family: "Indie Flower", sans-serif;
 }
 
 span.btn {
@@ -86,6 +90,7 @@ button:active {
 input {
 	border: 1px solid rgb(73, 73, 73);
 	border-radius: 3px;
+	font-family: "Indie Flower", sans-serif;
 }
 
 textarea:focus,
@@ -104,6 +109,7 @@ li {
 	border: 5px solid gray;
 	padding: 5px;
 	border-radius: 5px;
+	font-family: sans-serif;
 }
 
 #print {
@@ -128,6 +134,7 @@ li {
 
 	#print div.card {
 		height: 50vh;
+		font-family: sans-serif;
 	}
 
 	#print div.card.back {

@@ -4,6 +4,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Valintine Generator</title>
 		<link rel="stylesheet" href="styles.css" />
+		<link rel="icon" href="icon.png" />
 	</head>
 	<body>
 		<div id="header-background">❤️</div>
@@ -15,7 +16,7 @@
 			a template. Upload names from your clipboard or type them in manually. Use
 			one of the default templates or make your own. Print emojis and "TO" on
 			the back.<br />
-			It's all up to you, Just fill out the form below and press
+			It's all up to you, just fill out the form below and press
 			<span class="btn">Print!</span>
 		</div>
 		<div id="form">
@@ -41,9 +42,14 @@
 			<button onclick="addRecipient()">Add Recipient</button><br /><br />
 
 			Your name:
-			<input type="text" placeholder="Owen L." id="name" /><br /><br />
-			Print backside? <input type="checkbox" id="print-back" /><span
-				class="hide"
+			<input type="text" placeholder="Valen T. Ine" id="name" /><br /><br />
+			Print backside?
+			<input
+				type="checkbox"
+				id="print-back"
+				disabled
+				title="You can't print a back with only one recepient."
+			/><span class="hide"
 				><span class="subtext"
 					>Make sure to check "Print on both sides" in the print dialogue and
 					set flip to "on long edge".</span
