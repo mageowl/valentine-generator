@@ -101,6 +101,10 @@ input:focus {
 	outline: none;
 }
 
+b {
+	text-decoration: underline;
+}
+
 li {
 	padding-top: 3px;
 }
