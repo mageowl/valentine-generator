@@ -15,19 +15,30 @@ body {
 	background-color: pink;
 }
 
+#blurb {
+	padding: 2px 0 0 8px;
+}
+
 #form {
-	padding: 20px 0 0 8px;
+	padding: 20px 8px 0 8px;
 }
 
 #recipients {
 	margin-top: 10px;
 }
 
-#recipients span#no-recipient {
+#print-back:not(:checked) ~ span.hide {
+	display: none;
+}
+
+.subtext {
 	color: rgb(175, 175, 175);
 	font-style: italic;
-	display: block;
 	margin-bottom: 5px;
+}
+
+#no-recipient {
+	display: block;
 }
 
 #front-text {
@@ -44,11 +55,27 @@ h2 {
 	font-family: cursive;
 }
 
-button {
+button,
+span.btn {
 	background-color: transparent;
 	border: 1px solid rgb(73, 73, 73);
 	border-radius: 3px;
 	outline: none;
+	padding: 1px 6px;
+	font-size: 13.3333px;
+}
+
+button {
+	cursor: pointer;
+}
+
+textarea {
+	resize: vertical;
+	font-family: sans-serif;
+}
+
+span.btn {
+	cursor: default;
 }
 
 button:active {
@@ -73,6 +100,12 @@ li {
 	padding-top: 3px;
 }
 
+#preview {
+	border: 5px solid gray;
+	padding: 5px;
+	border-radius: 5px;
+}
+
 #print {
 	display: none;
 }
@@ -84,7 +117,8 @@ li {
 
 	#form,
 	#header-background,
-	#header {
+	#header,
+	#blurb {
 		display: none;
 	}
 
@@ -92,16 +126,31 @@ li {
 		display: block;
 	}
 
-	#print div.card-inside {
+	#print div.card {
 		height: 50vh;
 	}
 
-	#print div.card-inside:nth-child(odd) {
-		border-bottom: 3px solid gray;
+	#print div.card.back {
+		text-align: end;
+		line-height: 50vh;
+	}
+
+	#print div.card.back span.emoji {
+		position: absolute;
+		display: block;
+		left: 50vw;
+		font-size: 150px;
+		line-height: 50vh;
+		height: 50vh;
+		width: 30vw;
+	}
+
+	#print div.card:nth-child(odd) {
+		border-bottom: 5px solid gray;
 		box-sizing: border-box;
 	}
 
-	#print div.card-inside:nth-child(even):not(:last-child) {
+	#print div.card:nth-child(even):not(:last-child) {
 		page-break-after: always;
 	}
 }

@@ -8,6 +8,16 @@
 	<body>
 		<div id="header-background">❤️</div>
 		<h1 id="header">Valintine Generator</h1>
+		<div id="blurb">
+			Happy Valintines Day! Ever had trouble writing Valintine cards to 60
+			people? Well, I have.<br />
+			This tool can generate <b>thousands</b> of cards (with enough paper) from
+			a template. Upload names from your clipboard or type them in manually. Use
+			one of the default templates or make your own. Print emojis and "TO" on
+			the back.<br />
+			It's all up to you, Just fill out the form below and press
+			<span class="btn">Print!</span>
+		</div>
 		<div id="form">
 			Template:
 			<select id="template-select">
@@ -26,18 +36,35 @@
 			Recipients:
 			<button onclick="importRecipients();">Import from clipboard</button>
 			<ul id="recipients">
-				<span id="no-recipient">No recipients</span>
+				<span id="no-recipient" class="subtext">No recipients</span>
 			</ul>
 			<button onclick="addRecipient()">Add Recipient</button><br /><br />
 
-			Your name: <input type="text" placeholder="Owen L." id="name" /><br />
+			Your name:
+			<input type="text" placeholder="Owen L." id="name" /><br /><br />
+			Print backside? <input type="checkbox" id="print-back" /><span
+				class="hide"
+				><span class="subtext"
+					>Make sure to check "Print on both sides" in the print dialogue and
+					set flip to "on long edge".</span
+				><br />
+				Emoji: (seperate by newline)<br /><textarea id="emoji-list">
+❤️</textarea
+				>
+			</span>
+			<br />
 			<br />
 
-			<button onclick="printCards();">Print!</button>
+			<button onclick="printCards();">Print!</button><br />
+			<br />
+
+			Preview:<br />
+			<div id="preview"></div>
 		</div>
 
 		<div id="print">
-			<em>Warning:</em> Do not print out this page before pressing the print
+			<b>Warning:</b> Do not print out this page before pressing the
+			<span class="btn">Print!</span>
 			button.
 		</div>
 
